@@ -3,7 +3,7 @@ const ContextDataEvents = new Map();
 
 // сообщение от пользователя
 ContextDataEvents.set('message', event => {
-  var data = {
+  const data = {
     chat_id: event.chat.id,
     from_chat_id: event.chat.id,
     message_id: event.message_id

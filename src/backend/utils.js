@@ -7,7 +7,7 @@
  *   - add: a function that adds a handler to the storage for a given type
  */
 const createHandlerStorage = () => {
-  var storage = new Map();
+  const storage = new Map();
 
   return {
     has: type => storage.has(type),

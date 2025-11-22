@@ -8,11 +8,11 @@ const isBlob = (value) => typeof value.copyBlob === 'function';
  * @returns {Object} Request options with multipart body
  */
 const buildMultipartOptions = (payload) => {
-  var boundary = '----Bot' + Date.now();
-  var eol = '\r\n';
-  var eolBites = Utilities.newBlob(eol).getBytes();
-  var parts = [];
-  var attachCounter = 0;
+  let boundary = '----Bot' + Date.now();
+  const eol = '\r\n';
+  const eolBites = Utilities.newBlob(eol).getBytes();
+  const parts = [];
+  let attachCounter = 0;
 
 
   const addText = (name, value) => {
@@ -36,12 +36,12 @@ const buildMultipartOptions = (payload) => {
 
   for (const [key, value] of Object.entries(payload)) {
     if (key === 'media') {
-      var media = [];
-      for (var i = 0; i < value.length; i++) {
-        var item = { ...value[i] };
+      const media = [];
+      for (let i = 0; i < value.length; i++) {
+        const item = { ...value[i] };
 
         if (isBlob(item.media)) {
-          var name = 'attach_' + attachCounter++;
+          const name = 'attach_' + attachCounter++;
           addFile(name, item.media);
           item.media = 'attach://' + name;
         }
@@ -58,14 +58,14 @@ const buildMultipartOptions = (payload) => {
     }
 
     // Regular field
-    var text = typeof value === 'object' ? JSON.stringify(value) : String(value);
+    const text = typeof value === 'object' ? JSON.stringify(value) : String(value);
     addText(key, text);
   }
 
   parts.push(Utilities.newBlob('--' + boundary + '--' + eol).getBytes());
 
   // Flatten bytes
-  var bytes = parts.flat();
+  const bytes = parts.flat();
 
   return {
     method: 'POST',
@@ -108,13 +108,13 @@ const RequestSender = (token, options = {}) => {
   return function (method, payload) {
     let hasBlob = Object.values(payload).some(isBlob) || ('media' in payload && payload.media.length && payload.media.some((item) => isBlob(item?.media)));
 
-    var fetchOptions = hasBlob ? buildMultipartOptions(payload) : prepareRequestPayload(payload);
+    const fetchOptions = hasBlob ? buildMultipartOptions(payload) : prepareRequestPayload(payload);
 
-    var url = `https://api.telegram.org/bot${token}/${method}`;
+    const url = `https://api.telegram.org/bot${token}/${method}`;
 
     try {
-      var httpResponse = UrlFetchApp.fetch(url, Object.assign(options, fetchOptions));
-      var response = JSON.parse(httpResponse.getContentText());
+      const httpResponse = UrlFetchApp.fetch(url, Object.assign(options, fetchOptions));
+      const response = JSON.parse(httpResponse.getContentText());
 
       if (!response.ok) {
         throw new ResponseError(response.error_code, response.description);

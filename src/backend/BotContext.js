@@ -7,9 +7,9 @@
  * @return {object} The BotContext object.
  */
 const BotContext = (requestSender) => {
-  var EVENTS = createHandlerStorage();
-  var EVENT_CONTEXT_METHODS = new Map();
-  var self = {};
+  const EVENTS = createHandlerStorage();
+  const EVENT_CONTEXT_METHODS = new Map();
+  const self = {};
 
 
   self.event = new Proxy(EVENT_CONTEXT_METHODS, {
@@ -50,10 +50,10 @@ const BotContext = (requestSender) => {
    * @return {array} The list of handlers to be executed.
    */
   self.setUpdate = (eventPayload) => {
-    var eventName = Object.keys(eventPayload).find(key => key !== 'update_id');
-    var eventContext = EventContext(requestSender, EVENT_CONTEXT_METHODS, eventName, eventPayload);
+    const eventName = Object.keys(eventPayload).find(key => key !== 'update_id');
+    const eventContext = EventContext(requestSender, EVENT_CONTEXT_METHODS, eventName, eventPayload);
 
-    var handlers = [
+    const handlers = [
       ...runEventHandlers(eventName, eventName, eventContext),
       ...runEventHandlers(null, eventName, eventContext)
     ];
@@ -71,7 +71,7 @@ const BotContext = (requestSender) => {
    * @return {Array} - An array containing the results of running the event handlers.
    */
   function runEventHandlers(trigger, eventName, eventContext) {
-    var result = [];
+    const result = [];
     if (EVENTS.has(trigger)) {
       for (let handler of EVENTS.get(trigger))
         result.push(handler(eventContext, eventName));
@@ -81,7 +81,7 @@ const BotContext = (requestSender) => {
   }
 
 
-  var botContextResult = new Proxy(self, {
+  const botContextResult = new Proxy(self, {
     get: (target, prop) => target[prop]
       ?? ((requestPayload = {}) => requestSender(prop, requestPayload)),
 

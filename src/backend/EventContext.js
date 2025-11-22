@@ -8,10 +8,10 @@
  * @return {object} The new EventContext object.
  */
 const EventContext = (requestSender, eventMethods, eventName, eventPayload) => {
-  var eventData = eventPayload[eventName];
-  var contextPayload = EventContextPayload(eventName, eventData);
+  const eventData = eventPayload[eventName];
+  const contextPayload = EventContextPayload(eventName, eventData);
 
-  var eventContextResult = new Proxy(eventData, {
+  const eventContextResult = new Proxy(eventData, {
     get(target, prop) {
       if (prop in target)
         return target[prop];
