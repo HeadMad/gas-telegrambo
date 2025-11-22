@@ -1,14 +1,14 @@
 {
-  "name": "gas-svelte-project-name",
-  "description": "GAS Svelte Project Description",
+  "name": "gas-telegrambo",
+  "description": "A powerful and simple library for creating Telegram bots on Google Apps Script",
   "version": "1.0.0",
   "type": "module",
-  "author": "Your Name <email@example.com> (https://your-website.com)",
-  "repository": "https://github.com/username/gas-svelte-project-name",
+  "author": "HeadMad",
+  "repository": "https://github.com/headmad/gas-telegrambo",
   "bugs": {
-    "url": "https://github.com/username/gas-svelte-project-name/issues"
+    "url": "https://github.com/headmad/gas-telegrambo/issues"
   },
-  "homepage": "https://github.com/username/gas-svelte-project-name#readme",
+  "homepage": "https://github.com/headmad/gas-telegrambo#readme",
   "license": "MIT",
   "private": true,
   "scripts": {

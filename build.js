@@ -13,17 +13,17 @@ const CONFIG = {
   packageJsonPath: './package.json',
 
   modules: {
-    frontend: true,
+    frontend: false,
     backend: true
   },
 
   backendSettings: {
     concatenate: true,
-    outFile: 'Code.js',
+    outFile: 'Telegrambo.js',
     minify: true, // Финальное сжатие
     priorityOrder: [
-      'config.js',
-      'utils/logger.js'
+      // 'config.js',
+      // 'utils/logger.js'
     ]
   }
 };
